@@ -77,7 +77,13 @@ function cmdInjection_Bad03()
     console.log("Run3!");
   });
 }
-
+function cmdInjection_Bad04()
+{
+  var shell=require('shelljs');
+  var INITCMD="analyzer -s -t";
+  var cmd = INITCMD;
+  shell.exec(cmd);
+}
 window.onload=function()
 {
   cmdInjection_Good01();
