@@ -82,7 +82,7 @@ function cmdInjection_Bad04()
   var shell=require('shelljs');
   var INITCMD="analyzer -s -t";
   var cmd = INITCMD;
-  shell.exec(cmd);
+  shell.exec(cmd,{silent: true});
 }
 window.onload=function()
 {
