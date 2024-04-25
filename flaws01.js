@@ -18,6 +18,9 @@
 //   }
 // }
 
+const shell=require('shelljs');
+const cp = require('child_process');
+
 function systemInfoLeakInternal_Bad01()
 {
   var http=require('http');
@@ -41,7 +44,6 @@ function systemInfoLeakInternal_Bad01()
 
 function cmdInjection_Bad01()
 {
-  var cp = require('child_process');
   var home = process.env('GITPATH');
   var INITCMD="analyzer -s -t";
   var cmd = home + INITCMD;
@@ -52,7 +54,6 @@ function cmdInjection_Bad01()
 
 function cmdInjection_Good01()
 {
-  var cp = require('child_process');
   var INITCMD="analyzer -s -t";
   var cmd = INITCMD;
   child = cp.exec(cmd, function(error, stdout, stderr){
@@ -61,7 +62,6 @@ function cmdInjection_Good01()
 }
 function cmdInjection_Bad02(request,response)
 {
-  var cp = require('child_process');
   var url=require('url');
   var btype = url.parse(request.url, true)['query']['backuptype'];
   if (btype !== undefined){
@@ -79,10 +79,10 @@ function cmdInjection_Bad03()
 }
 function cmdInjection_Bad04()
 {
-  var shell=require('shelljs');
   var INITCMD="analyzer -s -t";
-  var cmd = INITCMD;
+  const cmd = INITCMD;
   shell.exec(cmd,{silent: true});
+  return shell.exec(cmd, {silent: true});
 }
 window.onload=function()
 {
